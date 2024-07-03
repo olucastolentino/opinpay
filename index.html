@@ -1,0 +1,1160 @@
+<!DOCTYPE html><html lang="pt-br"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Opina Pay</title>
+    <script src="js/main.js"></script>
+    <link rel="icon" href="favico.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favico.ico" type="image/x-icon">
+    <!--- all imports --->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/sweetalert2%254011.js"></script>
+    <script src="js/jquery.inputmask.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link href="css/bootstrap-icons.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-gioiano">
+      <div class="container">
+        <img src="images/logo.svg" width="35%" height="auto">
+        <div class="ml-auto" style="margin: 10px; width: 55%; display: none" onclick="handlePaymentAreaShortcut()" id="balance-container" name="balance-container">
+          <div class="my-balance">
+            <label class="my-balance-amount-label fw-semibold">Saldo disponível para ordem de saque</label><br>
+            <label class="my-balance-amount fw-semibold" style="color: var(--white)" id="my-balance-amount" name="my-balance-amount">R$ 0,00</label>
+            <p style="font-size: 0.8rem; color: var(--white)">
+              Clique aqui para sacar
+            </p>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <br><br>
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-1-container" name="step-1-container" style="margin-top: 10rem">
+      <div class="container-fluid py-2">
+        <h3 class="fw-semibold mt-3">Bem-vindo(a) ao Opina Pay!</h3>
+        <p>Para prosseguir, insira seu email abaixo:</p>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="txt-email" name="txt-email" oninput="handleEntry()">
+          <label for="floatingInput">Email</label>
+        </div>
+        <br>
+        <div class="alert alert-danger d-flex align-items-center p-2 not-show-important" role="alert" style="font-size: 0.875rem" id="div-email-error-label" name="div-email-error-label">
+          <div id="email-error-label" name="email-error-label"></div>
+        </div>
+        <button class="btn btn-success w-100 py-2 combo-gioiano border-gioiano" type="submit" id="next-step-btn" name="next-step-btn" onclick="handleFooterIcons()" disabled="">
+          Prosseguir
+        </button>
+        <p class="mt-3 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-2-container" name="step-2-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 25,00</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/cx.svg" class="mx-auto d-block" width="50%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para o atendimento da Caixa Econômica?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Em um banco, você prefere um cartão com limite maior ou menores
+          taxas?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              Limite maior
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              Menores taxas
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">3) Hoje, você faria um empréstimo na Caixa?</p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="2" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-2-btn" name="step-2-btn" step="2" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step3-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-3-container" name="step-3-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 37,00</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/bb.svg" class="mx-auto d-block" width="100%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para o atendimento do Banco do Brasil?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Em um banco, você prefere um cartão com limite maior ou menores
+          taxas?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              Limite maior
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              Menores taxas
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Hoje, você faria um empréstimo nesse banco?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="3" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-3-btn" name="step-3-btn" step="3" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step4-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-4-container" name="step-4-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 42,50</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/am.svg" class="mx-auto d-block" width="50%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para o Grupo Amazon?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Você prefere comprar produtos pela internet ou loja física?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              Internet
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              Pessoalmente
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Você já utilizou o site da Amazon para fazer compras?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="4" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-4-btn" name="step-4-btn" step="4" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step5-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-5-container" name="step-5-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 28,75</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/app.svg" class="mx-auto d-block" width="25%">
+        </div>
+        <br>
+        <p class="fw-semibold">1) De 1 a 5: qual nota você dá para a Apple?</p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Em uma loja de eletrônicos como a Apple, você prefere adquirir um
+          celular ou tablet?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              Celular
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              Tablet
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Com base na sua experiência geral, você recomendaria a Apple para
+          amigos e familiares?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="5" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-5-btn" name="step-5-btn" step="5" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step6-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-6-container" name="step-6-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 31,62</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/amb.svg" class="mx-auto d-block" width="50%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para o grupo Ambev?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Você prefere comprar bebidas com álcool ou sem álcool?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              Com álcool
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              Sem álcool
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Você já chegou a consumir algum dos produtos da Ambev?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="6" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-6-btn" name="step-6-btn" step="6" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step7-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-7-container" name="step-7-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 47,10</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/mc.svg" class="mx-auto d-block" width="30%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para o McDonald's?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Nos últimos 3 meses, você consumiu algum lanche do McDonald's?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Você recomendaria o McDonald's para algum amigo ou familiar?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="7" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-7-btn" name="step-7-btn" step="7" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step8-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-8-container" name="step-8-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 38,60</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/bk.svg" class="mx-auto d-block" width="30%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para o Burger King?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Você já consumiu algum produto do Burger King?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Você recomendaria o Burger King para algum amigo ou familiar?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="8" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-8-btn" name="step-8-btn" step="8" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step9-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-9-container" name="step-9-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 48,80</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/vi.svg" class="mx-auto d-block" width="50%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para Operadora Vivo?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Você já comprou algum produto da Vivo (exemplo: chip de celular)?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Você recomendaria a Vivo para algum amigo ou familiar?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="9" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-9-btn" name="step-9-btn" step="9" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step10-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-10-container" name="step-10-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 33,78</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/ti.svg" class="mx-auto d-block" width="42%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para Operadora Tim?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Você já comprou algum produto da Tim (exemplo: chip de celular)?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Você recomendaria a Tim para algum amigo ou familiar?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="10" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-10-btn" name="step-10-btn" step="10" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--step11-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-11-container" name="step-11-container" style="margin-top: 10rem; display: none !important">
+      <div class="container-fluid py-2">
+        <div style="display: block; text-align: center">
+          <h4 class="fw-semibold mt-3" style="display: block; text-align: center">
+            Colabore com a pesquisa e ganhe
+            <highlight-text class="highlight-text" style="
+                display: block;
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+              ">R$ 19,85</highlight-text>agora mesmo
+          </h4>
+          <hr>
+        </div>
+        <div class="container-image">
+          <img src="images/cl.svg" class="mx-auto d-block" width="32%">
+        </div>
+        <br>
+        <p class="fw-semibold">
+          1) De 1 a 5: qual nota você dá para Operadora Claro?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option1" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              1
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option2" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              2
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option3" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              3
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option4" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              4
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question1" id="option5" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              5
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          2) Você já comprou algum produto da Claro (exemplo: chip de celular)?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons2">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option1" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question2" id="option2" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <p class="fw-semibold">
+          3) Você recomendaria a Claro para algum amigo ou familiar?
+        </p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons3">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option1" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              Sim
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" name="question3" id="option2" autocomplete="off" step="11" onclick="handleSubmitBtn(this)">
+              Não
+            </label>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="step-11-btn" name="step-11-btn" step="11" onclick="handleNextStep(this)" disabled="">
+          Enviar respostas
+        </button>
+        <p class="mt-1 text-body-secondary" style="font-size: 0.8rem">
+          Responda todas questões para avançar
+        </p>
+        <p class="mt-5 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--paymentArea-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-987-container" name="step-987-container" style="margin-top: 9.1rem; display: none !important">
+      <div class="container-fluid py-2">
+        <h3 class="mt-3">Seu saldo</h3>
+        <div class="container-image">
+          <label class="my-final-balance fw-semibold" id="my-final-balance" name="my-final-balance">R$ 650,00</label>
+        </div>
+        <br>
+        <p>Selecione o seu tipo de chave PIX</p>
+        <div class="container mt-2">
+          <div class="btn-group btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" autocomplete="off" name="paymentMethod"><br>
+              <img src="images/file-text.svg" width="100%" height="auto" style="padding: 6px"><br><br><br>
+              <label style="font-size: 0.8rem">CPF/CNPJ</label>
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" autocomplete="off" name="paymentMethod" checked="">
+              <img src="images/smartphone.svg" width="100%" height="auto" style="padding: 6px"><br><br><br>
+              <label style="font-size: 0.8rem; margin-top: 1.2rem">Celular</label>
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" autocomplete="off" name="paymentMethod"><br>
+              <img src="images/mail.svg" width="100%" height="auto" style="padding: 6px"><br><br><br>
+              <label style="font-size: 0.8rem; margin-top: 2rem">Email</label>
+            </label>
+            <label class="btn btn-success border-gioiano rounded mx-2 combo-gioiano">
+              <input type="radio" autocomplete="off" name="paymentMethod"><br>
+              <img src="images/codesandbox.svg" width="75%" height="auto" style="padding: 6px"><br><br><br>
+              <label style="font-size: 0.8rem; margin-top: 0.3rem">Chave aleatória</label>
+            </label>
+          </div>
+        </div>
+        <br>
+        <p>
+          Aonde você quer
+          <highlithed-text class="fw-semibold">receber seu dinheiro</highlithed-text>? preencha o campo abaixo com sua chave PIX
+        </p>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="txt-pix-key" name="txt-pix-key" oninput="handleRequestMoneyBtn(this.value)">
+          <label for="floatingInput">Chave PIX</label>
+        </div>
+        <br>
+        <p>Agora, por favor, informe o valor que deseja sacar</p>
+        <div class="form-floating">
+          <input type="text" class="form-control money" id="txt-requested-amount" name="txt-requested-amount" oninput="handleRequestedAmount(this.value)">
+          <!--<label for="floatingInput">Valor do saque</label>-->
+        </div>
+        <br>
+        <button class="btn btn-success w-100 py-2 combo-gioiano" type="submit" id="send-payment-request" name="send-payment-request" onclick="handleAntiFraudFee()" disabled="">
+          Realizar saque</button><br><br><br>
+        <p class="mt-2 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--endPaymentArea-->
+    <!--infoArea-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-988-container" name="step-988-container" style="margin-top: 9.1rem; display: none !important">
+      <div class="container-fluid py-2">
+        <h3 class="mt-3">Perguntas frequentes</h3>
+        <div class="container mt-5">
+          <div class="card" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            <div class="card-header" id="headingOne">
+              <p class="fw-semibold mt-3">
+                Preciso pagar a Taxa Anti-fraude toda vez que eu quiser sacar?
+              </p>
+              <p style="font-size: 0.9rem">
+                Clique aqui para visualizar a resposta da pergunta
+              </p>
+            </div>
+            <div id="collapseOne" class="collapse">
+              <div class="card-body thirdiaryColor">
+                <highlighted-text class="fw-semibold">Não</highlighted-text>, a
+                Taxa Anti-fraude é paga
+                <highlighted-text class="fw-semibold">somente uma vez</highlighted-text>.<br><br>Suponha que você bata sua meta diária e queira
+                sacar
+                <highlighted-text class="fw-semibold" style="color: var(--primary)">R$300,00</highlighted-text>
+                hoje: você pagará a Taxa Anti-fraude hoje e amanhã poderá
+                contribuir novamente e sacar
+                <highlighted-text class="fw-semibold">sem precisar pagar a taxa novamente.</highlighted-text>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <div class="card-header" id="headingOne">
+              <p class="fw-semibold mt-3">Por que existe a Taxa Anti-fraude?</p>
+              <p style="font-size: 0.9rem">
+                Clique aqui para visualizar a resposta da pergunta
+              </p>
+            </div>
+            <div id="collapseTwo" class="collapse">
+              <div class="card-body thirdiaryColor">
+                A Taxa Anti-fraude se dá por conta de que, no passado, tivemos
+                fraudes e abuso dos saques, e a plataforma se mostrou
+                insustentável com esse tipo de abuso.<br><br>Agora, ao pagar
+                a taxa, o valor é vinculado ao email que você inseriu ao entrar
+                na plataforma, evitando os abusos que eram feitos na nossa
+                plataforma.
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <div class="card-header" id="headingOne">
+              <p class="fw-semibold mt-3">
+                Em até quanto tempo vai cair na minha conta?
+              </p>
+              <p style="font-size: 0.9rem">
+                Clique aqui para visualizar a resposta da pergunta
+              </p>
+            </div>
+            <div id="collapseThree" class="collapse">
+              <div class="card-body thirdiaryColor">
+                Você receberá seu saque
+                <highlighted-text class="fw-semibold">em até 24 horas</highlighted-text>.
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            <div class="card-header" id="headingOne">
+              <p class="fw-semibold mt-3">
+                Quantos saques posso fazer por dia?
+              </p>
+              <p style="font-size: 0.9rem">
+                Clique aqui para visualizar a resposta da pergunta
+              </p>
+            </div>
+            <div id="collapseFour" class="collapse">
+              <div class="card-body thirdiaryColor">
+                A quantidade de saques por dia é ilimitado, havendo limite
+                apenas na quantidade de opiniões que você pode dar por dia.
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+        <br>
+        <p class="mt-3 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <!--endInfoArea-->
+    <div class="p-1 bg-body-tertiary rounded-3 container-gioia" id="step-989-container" name="step-989-container" style="margin-top: 9.1rem; display: none !important">
+      <div class="container-fluid py-2">
+        <h3 class="fw-semibold mt-3">Limite diário alcançado!</h3>
+        <p>
+          Efetue o saque de seu dinheiro acumulado enquanto aguarda o próximo
+          dia para nos ajudar com a coleta de opiniões e faturar com isso!
+        </p>
+        <br>
+        <p class="mt-3 text-body-secondary">
+          © Opina Pay<br>
+          2021–2024
+        </p>
+      </div>
+    </div>
+    <br><br><br>
+    <div class="fixed-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col text-left">
+            <img src="images/pay.svg" width="37%" height="auto" style="margin-right: 1.5rem; margin-top: -0.2rem; opacity: 0.2" onclick="setHighlightIcon(this)" id="pay-icon" name="pay-icon">
+          </div>
+          <div class="col text-center">
+            <img src="images/home.svg" width="37%" height="auto" style="margin-right: -0.3rem; margin-top: -0.2rem" onclick="setHighlightIcon(this)" class="highlighted-icon" id="home-icon" name="home-icon">
+          </div>
+          <div class="col text-right">
+            <img src="images/info.svg" width="37%" height="auto" style="margin-left: 4rem; margin-top: -0.2rem; opacity: 0.2" onclick="setHighlightIcon(this)" id="info-icon" name="info-icon">
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+</body></html>

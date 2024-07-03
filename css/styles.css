@@ -1,0 +1,202 @@
+:root {
+    --primary: #27692e;
+    --white: #FFFFFF;
+    --secondary: #80b786;
+    --alternative: #f7ff00;
+    --third: #b7d8ba;
+    --gray: #cccccc;
+    --lightGreen: #317523;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary);
+    font-size: 14px;
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+    touch-zooming: none;
+    -ms-content-zooming: none;
+    -webkit-touch-callout: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled,
+button:disabled {
+    opacity: 0.4 !important;
+}
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+.screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.spinnerLabel {
+    position: fixed;
+    top: 45%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+}
+
+.container-gioia {
+    margin: 1rem;
+    background-color: var(--white) !important;
+    border-radius: 8px;
+    border: 1px solid var(--gray);
+}
+
+.show-important {
+    display: block !important;
+}
+
+.not-show-important {
+    display: none !important;
+}
+
+.fixed-footer {
+    position: fixed;
+    box-shadow: 1px 1px 15px 0px rgba(25, 0, 0, 0.2);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-left: 1px solid var(--gray);
+    border-right: 1px solid var(--gray);
+    border-top: 1px solid var(--gray);
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    padding: 15px;
+    font-size: 0.8rem;
+    background-color: var(--secondary);
+}
+
+.highlight-text {
+    color: var(--lightGreen);
+}
+
+.combo-gioiano {
+    background-color: var(--primary);
+    border-color: var(--primary)
+}
+
+.container-image {
+    border: 1px solid var(--gray);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 15px 0px rgba(25, 0, 0, 0.2);
+    margin: 15px;
+}
+
+.my-balance {
+    background-color: var(--primary);
+    box-shadow: 1px 1px 15px 0px rgba(25, 0, 0, 0.2);
+    border: 1px dotted var(--gray);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.my-balance-amount-label {
+    font-size: 0.8rem;
+    color: var(--white);
+}
+
+.my-balance-amount {
+    font-size: 1.5rem;
+}
+
+input[type="radio"]:checked {
+    accent-color: var(--secondary);
+}
+
+input[type="radio"] {
+    width: 10px;
+    height: 10px;
+}
+
+.thirdiaryColor {
+    background-color: var(--third);
+}
+
+.custom-confirm-button {
+    background-color: var(--primary) !important;
+    color: var(--white) !important;
+}
+
+.custom-title {
+    font-size: 1.3rem !important;
+}
+
+.highlighted-icon {
+    background-color: var(--primary);
+    padding: 4px;
+    border-radius: 16px;
+}
+
+.my-final-balance{
+    font-size: 1.7rem;
+    color:var(--primary);
+}
+
+.navbar-gioiano {
+    background-color: var(--secondary);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 0px;
+    border-left: 1px solid var(--gray);
+    border-right: 1px solid var(--gray);
+    border-bottom: 1px solid var(--gray);
+    box-shadow: 1px 1px 15px 0px rgba(25, 0, 0, 0.2);
+}
+
+.border-gioiano {
+    border: 1px solid var(--gray);
+    box-shadow: 1px 1px 15px 0px rgba(25, 0, 0, 0.2);
+}
+
+@media (min-width: 1024px) {
+    .navbar-gioiano, .fixed-footer{
+        display: none !important;
+    }
+    #step-1-container {
+        display: none !important;
+    }
+}
